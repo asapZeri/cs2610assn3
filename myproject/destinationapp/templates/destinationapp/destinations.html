@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Destinations</title>
+    <link rel="stylesheet" href="{% static 'destinationapp/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>My Destinations</h1>
+        <nav>
+            <a href="{% url 'newDestination' %}">Add New Destination</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </nav>
+    </header>
+
+    <section>
+        <ul>
+            {% for destination in destinations %}
+                <li>
+                    <strong>{{ destination.name }}</strong> - Rating: {{ destination.rating }}<br>
+                    {{ destination.review }}<br>
+                    <a href="{% url 'viewDestination' destination.id %}">View</a> |
+                    <a href="{% url 'editDestination' destination.id %}">Edit</a> |
+                    <a href="{% url 'deleteDestination' destination.id %}">Delete</a>
+                </li>
+            {% empty %}
+                <li>You have no destinations yet.</li>
+            {% endfor %}
+        </ul>
+    </section>
+</body>
+</html>

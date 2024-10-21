@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ destination.name }}</title>
+    <link rel="stylesheet" href="{% static 'destinationapp/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>{{ destination.name }}</h1>
+    </header>
+
+    <section>
+        <p><strong>Review:</strong> {{ destination.review }}</p>
+        <p><strong>Rating:</strong> {{ destination.rating }}/5</p>
+        <p><strong>Shared Publicly:</strong> {{ destination.share_publicly|yesno:"Yes,No" }}</p>
+    </section>
+
+    <nav>
+        <a href="{% url 'listDestinations' %}">Back to My Destinations</a>
+    </nav>
+</body>
+</html>

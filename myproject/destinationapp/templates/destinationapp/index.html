@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinations</title>
+    <link rel="stylesheet" href="{% static 'destinationapp/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Destinations</h1>
+        <nav class="navbar">
+            {% if request.user.is_authenticated %}
+                <a class="button" href="{% url 'listDestinations' %}">My Destinations</a>
+                <a class="button" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a class="button" href="{% url 'createAccount' %}">Create Account</a>
+                <a class="button" href="{% url 'signIn' %}">Sign in</a>
+            {% endif %}
+        </nav>
+    </header>
+    <section>
+        <h2>Recent Public Destinations</h2>
+        <ul>
+            {% for destination in destinations %}
+                <li>
+                    <strong>{{ destination.name }}</strong> - Rating: {{ destination.rating }}<br>
+                    {{ destination.review }}
+                    <p>Created by: {{ destination.user.name }}</p>
+                </li>
+            {% empty %}
+                <li>No public destinations available.</li>
+            {% endfor %}
+        </ul>
+    </section>
+</body>
+</html>
